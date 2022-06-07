@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Services\ProductService;
 
-use App\Repositories\ProductRepository ;
+use App\Dao\ProductDao;
 
 class ProductController extends Controller
 {

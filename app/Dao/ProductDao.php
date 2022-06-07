@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Dao;
 
 use App\Models\Product;
 
-class ProductRepository
+class ProductDao
 {
     /**
      * @var Product
@@ -12,7 +12,7 @@ class ProductRepository
     protected $product;
 
     /**
-     * ProductRepository constructor.
+     * ProductDao constructor.
      * 
      * @param Product $product
      */

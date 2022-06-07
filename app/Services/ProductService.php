@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\product;
-use App\Repositories\ProductRepository;
+use App\Dao\ProductDao;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -13,18 +13,18 @@ use InvalidArgumentException;
 class ProductService
 {
     /**
-     * @var $productRepository
+     * @var $productDao
      */
-    protected $productRepository;
+    protected $productDao;
 
     /**
      * productService constructor.
      *
-     * @param ProductRepository $productRepository
+     * @param ProductDao $productDao
      */
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductDao $productDao)
     {
-        $this->productRepository = $productRepository;
+        $this->ProductDao= $productDao;
     }
 
     /**
@@ -38,7 +38,7 @@ class ProductService
         DB::beginTransaction();
 
         try {
-            $product = $this->productRepository->delete($id);
+            $product = $this->ProductDao->delete($id);
 
         } catch (Exception $e) {
             DB::rollBack();
@@ -60,7 +60,7 @@ class ProductService
      */
     public function getAll()
     {
-        return $this->productRepository->getAll();
+        return $this->ProductDao->getAll();
     }
 
     /**
@@ -71,7 +71,7 @@ class ProductService
      */
     public function getById($id)
     {
-        return $this->productRepository->getById($id);
+        return $this->ProductDao->getById($id);
     }
 
     /**
@@ -95,7 +95,7 @@ class ProductService
         DB::beginTransaction();
 
         try {
-            $product = $this->productRepository->update($data, $id);
+            $product = $this->ProductDao->update($data, $id);
 
         } catch (Exception $e) {
             DB::rollBack();
@@ -125,7 +125,7 @@ class ProductService
             throw new InvalidArgumentException($validator->errors()->first());
         }
 
-        $result = $this->productRepository->save($data);
+        $result = $this->ProductDao->save($data);
 
         return $result;
     }
